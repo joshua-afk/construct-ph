@@ -1,0 +1,44 @@
+.panel{
+	background-color: $white;
+	border-radius: .9rem;
+	// box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+	// box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.07);
+	box-shadow: rgba(57, 73, 76, 0.35) 0px 1px 6px;
+}
+
+.panel__header{
+	padding: 1.5rem 2rem 1rem 2rem;
+}
+
+.panel__title{
+	color: #222222;
+}
+
+.panel__header-line{
+	height: 4px;
+	background-color: $pistachio;
+	width: 3rem;
+	// margin-bottom: 2rem;
+}
+
+.panel__body{
+	padding: 1rem 2rem 1.5rem 2rem;
+}
+
+.settings-nav__link-container{
+	padding: .8rem;
+
+	&.-active{
+		background-color: $white;
+		border-left: 5px solid $pistachio;
+		box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2);
+	}
+}
+
+.settings-nav__link{
+	color: $mine-shaft;
+
+	&.-active{
+		color: $pistachio;
+	}
+}

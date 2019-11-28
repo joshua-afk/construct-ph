@@ -1,0 +1,297 @@
+// Index Banner
+.banner{
+	// background: url("/storage/images/banner/home-banner.jpg") no-repeat scroll center center;
+	// background-size: cover;	
+	// height: 876px;
+	height: 846px;
+	z-index: 1;
+}
+
+.banner__carousel-container{
+	position: relative;
+	z-index: 1;
+	width: 100%;
+	height: 100%;
+}
+
+.banner__text-container{
+	position: absolute;
+	z-index: 2;
+	width: 100%;
+	padding: 0 15%;
+	top: 270px;
+}
+
+.banner__title{
+	font-size: 4rem;
+	font-weight: 600;
+	color: $white;
+}
+
+.banner-text__line{
+	height: 5px;
+	background-color: $pistachio;
+	width: 5rem;
+	margin-bottom: 1rem;
+}
+
+.banner__sub-title{
+	color: #E7E7E7;
+	font-size: 1.7rem;
+}
+// Index Banner End
+
+.index-header{
+	margin: 0 auto 50px auto;
+	text-align: center;
+	max-width: 40rem;
+}
+
+// Index User
+.index-user-section{
+	position: relative;
+	z-index: 3;
+}
+
+.card--index-user{
+	border: none !important;
+	border-radius: 18px;
+	box-shadow: 0px 0px 20px 0px rgba(0,0,0, 0.07) !important;
+	transition: box-shadow 0.2s ease-in-out, box-shadow 0.2s ease-in;
+}
+
+.card--index-user:hover{
+	box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2) !important;
+}
+
+.card-body--index-user {
+	padding: 1.5rem;
+}
+
+.card-title--index-user{
+	font-weight: bold;
+	margin: 1.5rem 0;
+	text-align: center;
+}
+
+.card-text--index-user{
+	font-size: 1rem;
+	color: #777777;
+	height: 14rem;
+}
+
+.index-user__logo-container{
+	margin: 0 auto;
+	height: 90px;
+	width: 90px;
+	border-radius: 50%;
+	background-color: rgba(210, 255, 0, 0.2);
+	border: 5px solid rgb(0,0,0, 0.01);
+	box-shadow: 0px 0px 0px 5px rgba(255,255,255,0.1);
+	display: flex;
+    align-items: center;
+    justify-content: center;
+
+	.fa-hard-hat,
+	.fa-file-contract,
+	.fa-truck-loading,
+	.fa-user-tie{
+		color: $pistachio !important;
+		font-size: 40px;
+	}
+}
+// Index User End
+
+// Index Proffessionals
+.index-ft-professionals{
+	background-color: $white;
+	margin-top: 100px;
+	margin-bottom: 50px;
+	padding: 2rem 0;
+}
+
+.index-ft-professionals__header{
+	margin: 0 auto 50px auto;
+	text-align: center;
+	max-width: 40rem;
+}
+
+.index-ft-professionals__title{
+	font-size: 2rem;
+	font-weight: 600;
+	margin-bottom: 1rem;
+	margin-bottom: 0;
+}
+
+.index-ft-professionals__sub-title{
+	font-size: 1.1rem;
+	color: #777777;
+}
+
+.card--index-ft-professionals{
+	border: none !important;
+	box-shadow: 0px 0px 20px 0px rgba(0,0,0, 0.07) !important;
+	transition: box-shadow 0.2s ease-in-out, box-shadow 0.2s ease-in;
+}
+
+.card--index-ft-professionals:hover{
+	box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2) !important;
+}
+// Index Proffessionals End
+
+/****** Index Projects ******/
+.index-ft-projects{
+	background-color: $white;
+	margin-top: 100px;
+	// margin-bottom: 50px;
+	padding: 2rem 0;
+}
+
+.index-ft-projects__img{
+	border-radius: 10px;
+}
+
+.card-title--index-ft-projects{
+	font-weight: bold;
+	line-height: 1;
+	margin-bottom: 0;
+}
+
+.index-ft-projects__icon{
+	color: #333333;
+}
+
+.index-ft-projects__header{
+	margin: 0 auto 50px auto;
+	text-align: center;
+	max-width: 40rem;
+}
+
+.index-ft-projects__title{
+	font-size: 2rem;
+	font-weight: 600;
+	margin-bottom: 1rem;
+	margin-bottom: 0;
+}
+
+.index-ft-projects__sub-title{
+	font-size: 1.1rem;
+	color: #777777;
+}
+// Index Projects End
+
+// .card-body__buttons{
+// 	margin: 1.5rem 0px;
+// 	text-align: center;
+
+// 	a.btn{
+// 		padding: 0.3rem 1rem;
+// 		font-size: 0.7875rem;
+// 		line-height: 1.5;
+// 		border-radius: 0.2rem;
+// 	}
+// }
+
+.index-facts{
+	background: url("/storage/images/landing/facts-bg.jpg") no-repeat scroll center center;
+	background-size: cover;	
+	height: 340px;
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	flex-direction: column;
+	margin: 5rem 0;
+}
+
+.col-md-3--index-facts{
+	border-right: 1px solid $white;
+}
+
+.index-facts__name{
+	color: $white;
+	font-size: 1.5rem;
+	margin-top: 1rem;
+}
+
+.index-facts__count{
+	color: $white;
+	font-size: 42px;
+	font-weight: 600;
+}
+// Index Facts End
+
+// Index Feedbacks
+.index-feedbacks{
+	margin-bottom: 5rem;
+}
+
+.index-feedbacks__header{
+	margin: 0 auto 50px auto;
+	text-align: center;
+	max-width: 40rem;
+}
+
+.index-feedbacks__title{
+	font-size: 2rem;
+	font-weight: 600;
+	margin-bottom: 1rem;
+	margin-bottom: 0;
+}
+
+.index-feedbacks__sub-title{
+	font-size: 1.1rem;
+	color: #777777;
+}
+
+.carousel--index-feedbacks{
+	height: 320px;
+}
+
+.carousel-indicators--index-feedbacks{
+	margin-bottom: 0;
+
+	li{
+		background-color: $pistachio;
+	}
+}
+
+.row--index-feedbacks{
+	padding: 1rem;
+}
+
+.card--index-feedbacks{
+	border: none !important;
+	box-shadow: 0px 0px 20px 0px rgba(0,0,0, 0.07) !important;
+	transition: box-shadow 0.2s ease-in-out, box-shadow 0.2s ease-in;
+}
+
+.card--index-feedbacks:hover{
+	box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2) !important;
+}
+
+.card-body--index-feedbacks{
+	text-align: center;
+}
+
+.index-feedbacks__img-container{
+	height: 70px;
+	width: 70px;
+	margin: 0 auto 1.5rem auto;
+}
+
+.index-feedbacks__img{
+	border-radius: 50%;
+	height: 100%;
+	width: 100%;
+}
+
+.card-text--index-feedbacks{
+	font-style: italic;
+	color: #777777;
+	padding: 0 4rem;
+}
+
+.index-feedbacks__star-container{
+	color: #FFC000;
+}
+// Index Feedbacks End

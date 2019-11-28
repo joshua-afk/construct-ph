@@ -1,0 +1,32 @@
+.blog-card, .job-card{
+	padding: 1.5rem;
+	background-color: $white;
+	margin-bottom: 1rem;
+	border-radius: .9rem;
+	box-shadow: rgba(57, 73, 76, 0.35) 0px 1px 6px;
+
+	&:hover{
+		background-color: #f9f9f9;
+	}
+}
+
+.blog-card__profile{
+	display: flex;
+	align-items: center;
+	margin-top: 1.5rem;
+	margin-bottom: 1.5rem;
+}
+
+.blog-card__body-text{
+	font-size: 1.1rem;
+	line-height: 1.5rem;
+}
+
+.blog-card__body-text > p{
+	color: #6c757d !important;
+}
+
+.blog-card__body p{
+	font-size: 1.1rem;
+	line-height: 1.5rem;
+}

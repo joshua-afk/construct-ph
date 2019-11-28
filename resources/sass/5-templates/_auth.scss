@@ -1,0 +1,47 @@
+.auth{
+	padding: 4rem 0 5rem 0;
+}
+
+.auth__container{
+	margin: 0 auto;
+	padding: 2rem 4rem;
+	background-color: $white;
+	border-radius: 5px;
+	// box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.2) !important;
+	box-shadow: rgba(57, 73, 76, 0.35) 0px 1px 6px;
+}
+
+.auth__container--register{
+	width: 50rem;
+}
+
+.auth__container--login{
+	width: 30rem;
+}
+
+.auth__header{
+	margin-bottom: 0.5rem;
+}
+
+.col-md-5--register{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+
+	i::before{
+		font-size: 12rem;
+		background: -webkit-linear-gradient(#000410, #A7CB00);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+}
+
+.auth__link{
+	display: flex;
+	align-items: center;
+}
+
+.auth__btn{
+	text-align: right;
+}

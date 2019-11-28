@@ -1,0 +1,2 @@
+<navbar-transparent>
+</navbar-transparent>

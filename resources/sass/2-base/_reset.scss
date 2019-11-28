@@ -1,0 +1,64 @@
+body {
+	position: relative;
+	min-height: 100%;
+	padding-bottom: 190px;
+	background-color: #f2f2f2;
+	font-family: Open Sans, Helvetica, Arial, sans-serif;
+}
+
+html {
+	height: 100%;
+}
+
+a, p, b, span, strong, label, ul, li, input, textarea, select, option, button{
+	font-size: 14px;
+	letter-spacing: .03em;
+}
+
+a {
+	color: $lime-green;
+
+	&:hover{
+		color: $pistachio;
+	}
+}
+
+h1{
+	font-size: 25px;
+}
+
+h2{
+	font-size: 22px;
+}
+
+h3{
+	font-size: 19px;
+}
+
+h4, h5, h6{
+	line-height: 23px;
+	font-size: 17px;
+	font-weight: 500;
+}
+
+h1, h2, h3, h4, h5, h6{
+	word-break: break-word;
+	font-family: inherit;
+	letter-spacing: .03em;
+}
+
+p {
+	color: #22292f;
+	line-height: 1.3rem;
+}
+
+small {
+	font-size: 13px;
+}
+
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+	-webkit-appearance: none; 
+	margin: 0;
+}

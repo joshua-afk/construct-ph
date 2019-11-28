@@ -1,0 +1,59 @@
+	/******  Clean Container  ******/
+.clean-container{
+	padding-top: 1.5rem;
+	padding-bottom: 1.5rem;
+	border-top: 1px solid #dddddd;
+}
+
+.clean-container-header{
+	
+}
+
+.clean-container-header__icon{
+	
+}
+
+.clean-container-header__text{
+	
+}
+
+.clean-container-title{
+	font-size: 1.125rem;
+	font-weight: 600;
+	color: #222222;
+}
+
+.clean-container-sub-title{
+	color: $mine-shaft;
+}
+
+.clean-container-year{
+	margin-top: 10px;
+	color: #6c757d;
+}
+
+.clean-container-text{
+	margin-top: .5rem;
+	color: $mine-shaft;
+}
+
+
+/**
+ * Container 2
+ *
+ * @used Job Posts
+ * 
+ */
+
+.container-2{
+	padding: 1.5rem 3rem;
+	border-top: 1px solid #E0E0E0;
+	
+	&:hover{
+		background-color: #F9F9F9;
+
+		h4{
+			color: $pistachio;
+		}
+	}
+}

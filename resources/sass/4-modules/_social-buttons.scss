@@ -1,0 +1,59 @@
+// Facebook
+.fb-button{
+	padding-right: 1rem;
+	padding-left: 0px !important;
+	background-color: #4267b2;
+	overflow: hidden;
+
+	&:hover{
+		background-color: #4285F4;
+		border-color: #4285F4;
+	}
+}
+
+.fb-button__icon-container{
+	background-color: #ffffff;
+	margin-left: -1px;
+	padding: 1.5rem 1rem;
+}
+
+.fb-button__icon{
+	color: #4285F4;
+	font-size: 20px;
+}
+
+.fb-button__text{
+	color: #ffffff;
+	font-weight: 700;
+	margin: 3rem
+}
+
+// Google
+.google-button{
+	padding-right: 1rem;
+	padding-left: 0px !important;
+	background-color: #ff4444;
+	overflow: hidden;
+
+	&:hover{
+		background-color: #d32f2f;
+		border-color: #d32f2f;
+	}
+}
+
+.google-button__icon-container{
+	background-color: #ffffff;
+	margin-left: -1px;
+	padding: 1.5rem 1rem;
+}
+
+.google-button__icon{
+	color: #d32f2f;
+	font-size: 20px;
+}
+
+.google-button__text{
+	color: #ffffff;
+	font-weight: 700;
+	margin: 3rem
+}

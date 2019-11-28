@@ -1,0 +1,153 @@
+.a-body{
+	padding-bottom: 0
+}
+
+.a-header{
+	position: relative;
+	display: inline-flex;
+	padding: 0 30px 0 calc(250px + 20px);
+	color: #ccc;
+	background: #322e2f;
+	line-height: 50px;
+	font-weight: 400;
+	border-bottom-right-radius: 20px;
+	margin-bottom: 0;
+
+}
+
+.a-header__icon{
+	font-size: 18px;
+}
+
+.a-header__arrow{
+	font-size: 15px;
+}
+
+
+.a-header__text{
+	font-size: 16px;
+}
+
+.a-section{
+	position: relative;
+	display: flex;
+	flex-flow: row;
+}
+
+.a-sidebar {
+	position: relative;
+	width: 270px;
+	height: calc(100vh - 50px);
+	overflow-y: auto;
+	margin-top: 0;
+	padding-top: 2rem;
+	background: #322e2f;
+}
+
+.a-sidebar__list{
+	position: relative;
+	display: block;
+	width: 100%;
+	color: #aaa;
+	transition: background 0.5s;
+
+	&.-active{
+		background: rgba(255,255,255,0.07);
+
+		a{
+			color: #cccccc !important;
+		}
+	}
+
+	a{
+		font-size: 15px;
+		position: relative;
+		display: block;
+		width: 100%;
+		padding-left: 1rem;
+		// padding-right: 1rem;
+		color: #aaaaaa;
+		transition: background 0.5s;
+		text-decoration: none;
+		padding-top: 0.8rem;
+		padding-bottom: 0.8rem;
+
+		&:hover{
+			color: #cccccc !important;
+			background: rgba(255,255,255,0.07);
+		}
+	}
+}
+
+.a-sidebar__list-item{
+	background-color: #322E2F;
+
+	a{
+		color: #aaaaaa !important;
+		font-size: 14px;
+		padding-left: 2rem;
+		padding-top: 0.6rem;
+		padding-bottom: 0.6rem;
+			
+		&:hover{
+			color: #cccccc !important;
+			background: rgba(255,255,255,0.07);
+		}
+	}
+}
+
+.a-sidebar__list-arrow{
+	width: 0px;
+	height: 0px;
+	border-top: 12px solid transparent;
+	border-bottom: 12px solid transparent;
+	border-right: 12px solid #F2F2F2;
+	float: right;
+}
+
+.a-sidebar__list-item-caret{
+	float: right;
+	padding-right: 1rem;
+}
+
+.a-sidebar__footer{
+	display: flex;
+	background-color: rgba(255,255,255,0.06);
+	width: 94%;
+	height: 2.5rem;
+	position: absolute;
+	bottom: 0;
+	justify-content: center;
+	align-items: center;
+
+	&:hover{
+		background-color: rgba(255,255,255,0.08);
+	}
+
+	a{
+		font-size: 1.3rem;
+		color: $guardsman-red;
+	}
+}
+
+.a-main{
+	position: relative;
+	flex: 1;
+	height: calc(100vh - 50px);
+	padding: 35px 70px 20px 70px;
+	border-top-left-radius: 20px;
+	margin-left: -1.1rem;
+	margin-top: 0px;
+	background-color: #F2F2F2;
+}
+
+.a-panel{
+    position: relative;
+    // width: calc(50% - 10px);
+    // max-width: 520px;
+    margin-bottom: 20px;
+    background: #fff;
+    padding: 16px 20px;
+    box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
