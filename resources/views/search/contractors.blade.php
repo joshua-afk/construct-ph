@@ -11,23 +11,24 @@
       <form action="/search/contractors" method="post" id="searchContractorForm">
         @csrf
         <li class="nav-item d-inline-block float-none mr-2">
-          <select class="form-control select2-contractors" name="code" required="required">
-            <option value="{{ $contractor->code }}">{{ $contractor->company_name }}</option>
+          @if ($contractor !== null)
+          <input class="form-control" list="classifications" id="codeInput" style="width: 700px" value="{{ $contractor->company_name }}">
+          @else
+          <input class="form-control" list="classifications" id="codeInput" style="width: 700px" value="{{ $code }}">
+          @endif
+          <datalist id="classifications">
             @foreach ($companies_list as $company)
-            <option value="{{ $company->code }}">{{ $company->company_name }}</option>
+            <option data-value="{{ $company->code }}">{{ $company->company_name }}</option>
             @endforeach
-          </select>
+          </datalist>
+          <input type="hidden" name="code" id="codeInput-hidden" value="{{ $code }}">
         </li>
         <li class="nav-item d-inline-block float-none mr-2">
           <button class="btn -lime" type="submit" onclick="document.getElementById('searchContractorForm')">
             <i class="fas fa-search"></i>&ensp;Search
           </button>
-          @if (Request::is('sort/contractors') || Request::is('search/contractors'))
-            <a class="btn -red" href="/contractors"><i class="fas fa-times"></i>&ensp;Clear</a>
-          @else
-          <button class="btn -blue" type="button" data-toggle="modal" data-target="#sortModal">
-            <i class="fas fa-sort"></i>&ensp;Sort
-          </button>
+          @if (Request::is('search/contractors/*'))
+            <a class="btn -red" href="/contractors">Clear</a>
           @endif
         </li>
       </form>
@@ -44,6 +45,7 @@
 
     <hr class="cstm-hr">
 
+    @if ($contractor !== null)
     <div class="row">
       <div class="col-md-4 cstm-mb-2">
         <div class="card -shadow-dynamic" style="border-radius: 15px;">
@@ -80,12 +82,15 @@
       </div>
       <div class="col-md-8" style="width: 100%">
         @if ($contractor->longtitude !== null && $contractor->latitude !== null)
-          {!! Mapper::render() !!}
+        {!! Mapper::render() !!}
         @else
-          <h2>No data to show.</h2>
+        <h2>No data to show.</h2>
         @endif
       </div>
     </div>
+    @else
+    <h2 class="mt-5 text-center">Ooops! There is no data to show.</h2>
+    @endif
   </div>
 </section>
 {{-- Content --}}
@@ -169,7 +174,8 @@
   $(document).ready(function() {
     $(".select2-contractors").select2({
       placeholder: "Select contractor",
-      allowClear: true
+      multiple: true,
+      maximumSelectionSize: 1
     });
 
     $(".select2-category").select2({
@@ -195,6 +201,25 @@
       placeholder: "Specialization",
       allowClear: true
     });
+  });
+
+  document.querySelector('input[list]').addEventListener('input', function(e) {
+    var input = e.target,
+    list = input.getAttribute('list'),
+    options = document.querySelectorAll('#' + list + ' option'),
+    hiddenInput = document.getElementById(input.getAttribute('id') + '-hidden'),
+    inputValue = input.value;
+
+    hiddenInput.value = inputValue;
+
+    for(var i = 0; i < options.length; i++) {
+      var option = options[i];
+
+      if(option.innerText === inputValue) {
+        hiddenInput.value = option.getAttribute('data-value');
+        break;
+      }
+    }
   });
 </script>
 @endsection

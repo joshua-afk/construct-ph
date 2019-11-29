@@ -11,25 +11,18 @@
 			<form action="/search/contractors" method="post" id="searchContractorForm">
 				@csrf
 				<li class="nav-item d-inline-block float-none mr-2">
-					<select class="form-control select2-contractors" name="code" required="required">
-						<option></option>
-						{{-- @foreach ($companies_list as $company) --}}
+					<input class="form-control" list="classifications" id="codeInput" style="width: 700px">
+					<datalist id="classifications">
 						@foreach ($companies_names as $company)
-						<option value="{{ $company->code }}">{{ $company->company_name }}</option>
+						<option data-value="{{ $company->code }}">{{ $company->company_name }}</option>
 						@endforeach
-					</select>
+					</datalist>
+					<input type="hidden" name="code" id="codeInput-hidden">
 				</li>
 				<li class="nav-item d-inline-block float-none mr-2">
 					<button class="btn -lime" type="submit" onclick="document.getElementById('searchContractorForm')">
 						<i class="fas fa-search"></i>&ensp;Search
 					</button>
-					@if (Request::is('sort/contractors') || Request::is('search/contractors'))
-						<a class="btn -red" href="/contractors"><i class="fas fa-times"></i>&ensp;Clear</a>
-					@else
-					<button class="btn -blue" type="button" data-toggle="modal" data-target="#sortModal">
-						<i class="fas fa-sort"></i>&ensp;Sort
-					</button>
-					@endif
 				</li>
 			</form>
 		</ul>
@@ -42,10 +35,64 @@
 		<h1 class="all-contractors__title">Our Contractors</h1>
 		<div class="all-contractors__header-line"></div>
 		<p class="all-contractors__sub-title mb-3">Want to register your company? <a href="/register">Sign up now!</a></p>
+		{{-- Sort --}}
+		<form action="/sort/contractors" method="post" id="sortContractorsForm">
+			@csrf
+			<div class="d-flex justify-center mt-3">
+				<li class="nav-item d-inline-block float-none mr-1">
+					<select class="form-control select2-category" name="category">
+						<option></option>
+						<option value="N/A">N/A</option>
+						<option value="E">E (Trade)</option>
+						<option value="D">D</option>
+						<option value="C">C</option>
+						<option value="B">B</option>
+						<option value="A">A</option>
+						<option value="AA">AA</option>
+						<option value="AAA">AAA</option>
+						<option value="AAAA">AAAA</option>
+					</select>
+				</li>
+				<li class="nav-item d-inline-block float-none mr-1">
+					<select name="location" class="form-control select2-location">
+						<option></option>
+						@foreach ($regions as $region)
+						<option value="{{ $region->id }}">{{ $region->code.' - '.$region->name }}</option>
+						@endforeach
+					</select>
+				</li>
+				<li class="nav-item d-inline-block float-none mr-1">
+					<select class="form-control select2-classification" name="classification">
+						<option></option>
+						@foreach ($classifications as $classification)
+						<option value="{{ $classification->id }}">{{ $classification->name }}</option>
+						@endforeach
+					</select>
+				</li>
+				<li class="nav-item d-inline-block float-none mr-1">
+					<input
+					class="form-control @error('range') is-invalid @enderror"
+					type="number"
+					name="range"
+					value="{{ old('range') }}"
+					placeholder="Pricing range"
+					min="0">
+				</li>
+				<li class="nav-item d-inline-block float-none mr-1">
+					<button class="btn -blue" type="submit" onclick="document.getElementById('sortContractorsForm').submit()">Sort</button>
+				</li>
+				@if (Request::is('sort/contractors'))
+				<li class="nav-item d-inline-block float-none">
+					<a class="btn -red" href="/contractors">Clear</a>
+				</li>
+				@endif
+			</div>
+			</form>
+			{{-- Sort --}}
 
 		<hr class="cstm-hr">
 
-		@if (!is_null($companies_list))
+		@if (!$companies_list->isEmpty())
 		<div class="row">
 			@foreach ($companies_list as $contractor)
 			<div class="col-md-4 cstm-mb-2">
@@ -169,27 +216,19 @@
 @section('scripts')
 <script>
 	$(document).ready(function() {
-		$(".select2-contractors").select2({
-			placeholder: "Select contractor",
-			allowClear: true
-		});
-
 		$(".select2-category").select2({
 			placeholder: "Category",
-			width: '100%',
 			allowClear: true
 		});
 
 		$(".select2-location").select2({
 			placeholder: "Location",
-			width: '100%',
 			allowClear: true
 		});
 
 		$(".select2-classification").select2({
 			placeholder: "Classification",
 			allowClear: true,
-			width: '100%',
 			sortResults: data => data.sort((a, b) => a.text.localeCompare(b.text)),
 		});
 
@@ -197,6 +236,25 @@
 			placeholder: "Specialization",
 			allowClear: true
 		});
+	});
+
+	document.querySelector('input[list]').addEventListener('input', function(e) {
+		var input = e.target,
+		list = input.getAttribute('list'),
+		options = document.querySelectorAll('#' + list + ' option'),
+		hiddenInput = document.getElementById(input.getAttribute('id') + '-hidden'),
+		inputValue = input.value;
+
+		hiddenInput.value = inputValue;
+
+		for(var i = 0; i < options.length; i++) {
+			var option = options[i];
+
+			if(option.innerText === inputValue) {
+				hiddenInput.value = option.getAttribute('data-value');
+				break;
+			}
+		}
 	});
 </script>
 @endsection

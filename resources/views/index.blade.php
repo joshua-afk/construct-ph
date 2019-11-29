@@ -1,4 +1,5 @@
 @extends('layouts.guest_app')
+
 @section('content')
 <landing
     :professionals = "{{ json_encode($professionals) }}"

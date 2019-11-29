@@ -13,9 +13,9 @@ class ContractorController extends Controller
     public function store()
     {
         if (!session()->has('user_id')) {
-            return redirect('/login')->with(['login' => 'Please login to continue.', 'redirect' => '/search/contractors/'. request()->code]);
+            return redirect('/login')
+                   ->with(['login' => 'Please login to continue.', 'redirect' => '/search/contractors/'. request()->code]);
         }
-
         return redirect('/search/contractors/'.request()->code);
     }
 
@@ -29,7 +29,7 @@ class ContractorController extends Controller
                                     ->where('code', $code)
                                     ->with('region')
                                     ->select('id', 'code', 'company_name', 'category', 'pcab_license', 'longtitude', 'latitude', 'region_id')
-                                    ->firstOrFail();
+                                    ->first();
 
         $companies_list = Company::orderBy('company_name')
                                  ->where('type', 'contractor')
@@ -42,8 +42,10 @@ class ContractorController extends Controller
 									
     	$classifications = Classification::orderBy('name')->get();
 
-        Mapper::map($contractor->latitude, $contractor->longtitude, ['zoom' => 15]);
+        if ($contractor !== null) {
+            Mapper::map($contractor->latitude, $contractor->longtitude, ['zoom' => 15]);
+        }
 
-    	return view('search.contractors', compact('contractor', 'companies_list', 'classifications', 'regions'));
+    	return view('search.contractors', compact('contractor', 'companies_list', 'classifications', 'regions', 'code'));
     }
 }
