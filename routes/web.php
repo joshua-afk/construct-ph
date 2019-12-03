@@ -51,7 +51,7 @@ Route::get('/blog', 'BlogController@index')->name('blog');
 Route::get('/email-us', 'EmailUsController@create');
 Route::post('/email-us', 'EmailUsController@store');
 
-Route::get('/contractors', 'ContractorController@index');
+Route::get('/contractors',                                  'ContractorController@index');
 Route::get('/sort/contractors',                             'SortContractorController@index');
 Route::post('/sort/contractors',                            'SortContractorController@store');
 
@@ -120,11 +120,15 @@ Route::prefix('profile')->group(function () {
     Route::get('/credentials', 'Account\CredentialController@index');
 });
 
+
 /******  Companies  ******/
-Route::get('/companies', 'CompanyController@index');
-Route::post('/companies', 'CompanyController@store');
-Route::get('/companies/create', 'CompanyController@create');
-Route::get('/companies/{company}', 'CompanyController@show');
+Route::prefix('companies')->group(function () {
+    Route::get('/',                                         'CompanyController@index');
+    Route::post('/',                                        'CompanyController@store');
+    Route::get('/create',                                   'CompanyController@create');
+    Route::get('/{company}',                                'CompanyController@show');
+});
+
 
 /******  Account Credentials  ******/
 Route::prefix('account')->group(function () {
@@ -141,9 +145,9 @@ Route::prefix('account')->group(function () {
 
     // Route::post('/experience',      					'Account\ExperienceController@store');
 
-    Route::get('/companies', 'Account\CompanyController@index');
-    Route::get('/companies/{uuid}', 'Account\CompanyController@show');
-    Route::get('/companies/{uuid}/edit', 'Account\CompanyController@edit');
+    Route::get('/companies',                                'Account\CompanyController@index');
+    Route::get('/companies/{uuid}',                         'Account\CompanyController@show');
+    Route::get('/companies/{uuid}/edit',                    'Account\CompanyController@edit');
 
     Route::get('/projects', 'Account\ProjectController@index'); // show the current user session projects
     Route::get('/projects/{username}', 'Account\ProjectController@show'); // for visitors

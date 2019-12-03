@@ -16,7 +16,6 @@ class JobInvitationController extends Controller
         // }
 
         $job_invitations = JobInvitation::where('entity_id', session('user_id'))->get();
-
         return json_encode($job_invitations);
     }
 }

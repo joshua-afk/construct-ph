@@ -14,6 +14,7 @@ class ProfileController extends Controller
 	public function show($username)
 	{
 		$user = User::where('username', $username)->firstOrFail();
+		// return $user = User::where('username', $username)->firstOrFail()->companies;
 
 		if (session()->hasNo('user_id')) {
 			return redirect('/login')->with(['login' => 'Please login to continue.']);

@@ -15,8 +15,10 @@ class CompanyController extends Controller
     public function show($company)
     {
         $company = Company::where('code', $company)->firstOrFail();
-        dd($company);
-        return view('show_company', compact('company'));
+        $ratings_average = (count($company->reviews) !== 0) ?
+                           (array_sum($company->reviews->pluck('rate')->toArray()) / count($company->reviews)) :
+                           0 ;
+        return view('company.show', compact('company', 'ratings_average'));
     }
 
     public function create()

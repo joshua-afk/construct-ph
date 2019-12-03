@@ -89,10 +89,74 @@
 			</div>
 			</form>
 			{{-- Sort --}}
-
+	
 		<hr class="cstm-hr">
 
-		@if (!$companies_list->isEmpty())
+		@if (Request::is('contractors'))
+		<contractors
+			:session="{{ json_encode(session()->all()) }}"
+		></contractors>	
+		@elseif(Request::is('sort/contractors'))
+		<!-- Your code hasn't changed-->
+		<div id="sortContractors">
+			@forelse (array_chunk($companies_list->all(), 3) as $chunk)
+			<div class="row">
+				@foreach($chunk as $contractor)
+				<div class="col-md-4 cstm-mb-2">
+					<div class="card -shadow-dynamic" style="border-radius: 15px;">
+						@if (!is_null($contractor->image))
+						<img src="/storage/images/companies/{{ $contractor->image }}" alt="{{ $contractor->image }}" class="card-img-top img--responsive" style="border-top-left-radius: calc(15px - 1px); border-top-right-radius: calc(15px - 1px);">
+						@else
+						<img src="/storage/images/no-image.jpg" alt="no-image" class="card-img-top img--responsive" style="border-top-left-radius: calc(15px - 1px); border-top-right-radius: calc(15px - 1px);">
+						@endif
+
+						<div class="card-body">
+							<div class="all-contractors__card-title">
+								<h5 class="card-title">{{ $contractor->company_name }}</h5>
+							</div>
+							<hr class="cstm-hr">
+							<div class="all-contractors__card-text">
+								<p class="card-text">
+									<strong>Catergory:</strong>
+									{{ $contractor->category }}
+								</p>
+								<p class="card-text">
+									<strong>PCAB License:</strong>
+									{{ ($contractor->pcab_license != null) ? $contractor->pcab_license : 'No data to show->' }}
+								</p>
+								<p class="card-text">
+									<strong>Region:</strong>
+									@if (session('user_id') !== null)
+									{{ ($contractor->region != null) ? $contractor->region->name : 'No data to show.' }}
+									@else
+									No data to show.
+									@endif
+								</p>
+							</div>
+							<hr>
+							<a class="btn -lime-outline btn-block" href="/companies/{{ $contractor->code }}">
+								View Company
+							</a>
+						</div>
+					</div>
+				</div>
+				@endforeach
+			</div>
+			@empty
+			<h2 class="mt-5 text-center">Ooops! There is no data to show.</h2>
+			@endforelse
+		</div>
+		@endif 
+
+		{{-- Holds page information --}}
+		{{-- <input type="hidden" id="page" value="{{ $companies_list->currentPage() }}">
+		<input type="hidden" id="max_page" value="{{ $companies_list->lastPage() }}">
+
+		<div id="end_of_page" class="center">
+			<hr/>
+			<span>You've reached the end of the feed.</span>
+		</div> --}}
+		{{-- @if (!$companies_list->isEmpty())
 		<div class="row">
 			@foreach ($companies_list as $contractor)
 			<div class="col-md-4 cstm-mb-2">
@@ -119,8 +183,11 @@
 							</p>
 							<p class="card-text">
 								<strong>Region:</strong>
-								No data to show.
-								{{-- {{ ($contractor->region != null) ? $contractor->region->name : 'No data to show.' }} --}}
+								@if (session('user_id') !== null)
+									{{ ($contractor->region != null) ? $contractor->region->name : 'No data to show.' }}
+								@else
+									No data to show.
+								@endif
 							</p>
 						</div>
 						<hr>
@@ -134,84 +201,11 @@
 		</div>
 		@else
 		<h2 class="mt-5 text-center">Ooops! There is no data to show.</h2>
-		@endif
+		@endif --}}
 	</div>
 </section>
 {{-- Content --}}
 @endsection
-
-@push('modal')
-<div class="modal fade" id="sortModal" role="dialog" aria-labelledby="sortModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="sortModalLabel">Sort Contractors</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<form action="/sort/contractors" method="post" id="sortContractorsForm">
-					@csrf
-
-					<div class="form-group">
-						<label class="fw-bold">PCAB Catergory</label>
-						<select class="form-control select2-category" name="category">
-							<option></option>
-							<option value="N/A">N/A</option>
-							<option value="E">E (Trade)</option>
-							<option value="D">D</option>
-							<option value="C">C</option>
-							<option value="B">B</option>
-							<option value="A">A</option>
-							<option value="AA">AA</option>
-							<option value="AAA">AAA</option>
-							<option value="AAAA">AAAA</option>
-						</select>
-						@error('category') @alert() {{ $message }} @endalert @enderror
-					</div>
-				
-					<div class="form-group">
-						<label class="fw-bold">Location</label>
-						<select name="location" class="form-control select2-location">
-							<option></option>
-							@foreach ($regions as $region)
-							<option value="{{ $region->id }}">{{ $region->code.' - '.$region->name }}</option>
-							@endforeach
-						</select>
-						@error('location') @alert() {{ $message }} @endalert @enderror
-					</div>
-
-					<div class="form-group">
-						<label class="fw-bold">Classification</label>
-						<select class="form-control select2-classification" name="classification">
-							<option></option>
-							@foreach ($companies_list as $company)
-							<option value="{{ $company->id }}">{{ $company->company_name }}</option>
-							@endforeach
-						</select>
-					</div>
-
-					<div class="form-group">
-						<label class="fw-bold">Pricing Range</label>
-						<input
-							class="form-control @error('range') is-invalid @enderror"
-							type="number"
-							name="range"
-							value="{{ old('range') }}"
-							min="0">
-						@error('range') @alert() {{ message }} @endalert @enderror
-					</div>
-				</form>
-			</div>
-			<div class="modal-footer">
-				<button class="btn -back" type="button" data-dismiss="modal">Go back</button>
-				<button class="btn -submit" type="submit" onclick="document.getElementById('sortContractorsForm').submit()">Sort</button>
-			</div>
-		</div>
-	</div>
-</div>
-@endpush
 
 @section('scripts')
 <script>
@@ -238,6 +232,7 @@
 		});
 	});
 
+	// Input Datalist
 	document.querySelector('input[list]').addEventListener('input', function(e) {
 		var input = e.target,
 		list = input.getAttribute('list'),
@@ -256,5 +251,58 @@
 			}
 		}
 	});
+
+	// Infinite Scroll
+	var outerPane = $('#sortContractors'),
+	didScroll = false;
+
+	$(window).scroll(function() {
+		didScroll = true;
+	});
+
+	//Sets an interval so your window.scroll event doesn't fire constantly. This waits for the user to stop scrolling for not even a second and then fires the pageCountUpdate function (and then the getPost function)
+	setInterval(function() {
+		if (didScroll){
+			didScroll = false;
+			if(($(document).height()-$(window).height())-$(window).scrollTop() < 10){
+				pageCountUpdate();
+			}
+		}
+	}, 250);
+
+	function pageCountUpdate(){
+		var page = parseInt($('#page').val());
+		var max_page = parseInt($('#max_page').val());
+
+		if(page < max_page){
+			$('#page').val(page+1);
+			getPosts();
+			$('#end_of_page').hide();
+		} else {
+			$('#end_of_page').fadeIn();
+		}
+	}
+
+	//Ajax call to get your new posts
+	// function getPosts(){
+	// 	$.ajax({
+	// 		type: "POST",
+ //        url: "/sort/contractors",
+ //        data: {
+ //        	page: {{-- {{ $companies_list->currentPage() }} --}},
+        	
+ //        },
+ //        beforeSend: function(){ //This is your loading message ADD AN ID
+ //        	$('#sortContractors').append("<div id='loading' class='center'>Loading news items...</div>");
+ //        },
+ //        complete: function(){ //remove the loading message
+ //        	$('#loading').remove
+ //        },
+ //        success: function(html) { // success! YAY!! Add HTML to sortContractors container
+ //        	$('#sortContractors').append(html);
+ //        	alert('loading');
+ //        }
+ //      });
+	// }
 </script>
 @endsection

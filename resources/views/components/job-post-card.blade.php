@@ -13,13 +13,13 @@
 					<div class="mr-3">
 						@if (in_array($id, $bookmarks))
 						<button
-							class="btn pl-0 pr-0 -circle -blue"
+							class="btn pl-0 pr-0 -circle -lime"
 							onclick="unbookmark('{{ $code }}')">
 						<i class="far fa-bookmark"></i>
 						</button>
 						@else
 						<button
-							class="btn pl-0 pr-0 -circle -blue-outline"
+							class="btn pl-0 pr-0 -circle -lime-outline"
 							onclick="bookmark('{{ $code }}')">
 						<i class="far fa-bookmark"></i>
 						</button>

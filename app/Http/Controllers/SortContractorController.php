@@ -13,16 +13,15 @@ class SortContractorController extends Controller
 
     public function store()
     {
-        // return request()->all();
     	$category = (request()->category !== 'N/A') ? request()->category : null;
 
-    	$companies_list = Company::orderBy('company_name')
+    	return $companies_list = Company::orderBy('company_name')
     							 ->where('type', 'contractor')
     							 ->where('category', $category)
-    							 ->where('region_id', request()->location)
-    							 ->with('region')
+    							 // ->where('region_id', request()->location)
+    							 // ->with('region')
     							 ->select('id', 'code', 'company_name', 'category', 'pcab_license')
-    							 ->get();
+    							 ->paginate(12);
 
         $companies_names = Company::orderBy('company_name')
                                  ->where('type', 'contractor')

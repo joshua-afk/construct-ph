@@ -22,7 +22,7 @@ Vue.component('profile',			 					require('./components/Profile.vue').default);
 
 // All
 Vue.component('all-professionals',			 			require('./components/AllProfessionals.vue').default);
-Vue.component('all-contractors',			 			require('./components/AllContractors.vue').default);
+Vue.component('contractors',			 				require('./components/contractors/index.vue').default);
 Vue.component('all-suppliers',			 				require('./components/AllSuppliers.vue').default);
 
 
@@ -40,6 +40,11 @@ Vue.component('show-project',			 				require('./components/ShowProject.vue').def
 
 // Edit
 // ...
+
+
+// Sort
+Vue.component('contractors-sort',			 			require('./components/contractors/sort.vue').default);
+
 
 // Search
 Vue.component('search-all-contractors',			 		require('./components/search/AllContractors.vue').default);
