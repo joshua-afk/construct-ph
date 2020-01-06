@@ -16,7 +16,8 @@ class CreateJobClassificationsTable extends Migration
         Schema::create('job_classifications', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('job_id');
-            $table->integer('classification_id');
+            /* $table->integer('classification_id'); */
+            $table->string('classification');
             $table->timestamps();
         });
     }
