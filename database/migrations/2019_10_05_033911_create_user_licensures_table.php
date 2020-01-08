@@ -19,7 +19,6 @@ class CreateUserLicensuresTable extends Migration
             $table->string('type')->nullable();
             $table->string('name')->nullable();
             $table->string('number')->nullable();
-            $table->boolean('is_ongoing');
             $table->timestamps();
         });
     }
